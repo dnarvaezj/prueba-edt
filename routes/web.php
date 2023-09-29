@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RestaurantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [RestaurantController::class, 'index'])->name('home');
+
+Route::post('/restaurant/loadcsv', [RestaurantController::class, 'loadCsv'])->name('load_csv');
+Route::post('/restaurant/create', [RestaurantController::class, 'create'])->name('create_restaurant');
+Route::put('/restaurant/update/{id}', [RestaurantController::class, 'update'])->name('edit_restaurant');
+Route::delete('/restaurant/delete/{id}', [RestaurantController::class, 'delete'])->name('delete_restaurant');
